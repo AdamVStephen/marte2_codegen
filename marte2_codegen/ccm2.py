@@ -102,7 +102,7 @@ class Package:
                  template='https://github.com/AdamVStephen/marte2_cookiecutter_package',
                  package_name = "package",
                  gams_list = ["GAM_Alpha GAM_Beta"]):
-        logging.info("Package ctor")
+        logging.debug("Package ctor")
         self.template = template
         self.package_name = package_name.lower()
         self.gams_list = gams_list
@@ -175,19 +175,17 @@ class GAM:
 def build_package(package_name="package",
                   gams_list=["MyGAM"]):
     # Create the Skeleton Project First
-    logging.info("Create a Skeleton package using UKAEA standard license")
+    logging.debug("Create a Skeleton package using UKAEA standard license")
     logging.debug("3.141")
     package = Package(package_name = package_name, gams_list = gams_list)
     if True:
-        logging.info("Work In Progress")
         package.cut()
-        logging.info("Package has been cut")
         for gam_name in gams_list:
-            logging.info("Create a GAM skeleton locally for %s" % gam_name)
+            logging.debug("Create a GAM skeleton locally for %s" % gam_name)
             gam = GAM(package_name = package.package_name, gam_name = gam_name)
-            logging.info("GAM object created")
+            logging.debug("GAM {0} object created".format(gam_name))
             gam.cut()
-            logging.info("GAM object cut()")
+            logging.debug("GAM {0} cut()".format(gam_name))
             # Relocate the GAM implementation into the package
             g = gam.gam_name
             p = package.package_name_capitalized
@@ -195,24 +193,22 @@ def build_package(package_name="package",
             source = "%s/Source/%s/GAMs/%s" % (g,p,g)
             destination = "%s/Source/%s/GAMs" % (r,p)
             moved = shutil.move(source, destination)
-            logging.info("mv %s %s : done" % (source, destination))
+            logging.debug("mv %s %s : done" % (source, destination))
             # Relocate the GAM Test implementation into the package
             source = "%s/Test/%s/GAMs/%s" % (g,p,g)
             destination = "%s/Test/%s/GAMs" % (r, p)
             moved = shutil.move(source, destination)
-            logging.info("mv %s %s : done" % (source, destination))
+            logging.debug("mv %s %s : done" % (source, destination))
             # Remove the remainder of the stub GAM sources
             tree = "%s" % g
             shutil.rmtree(tree)
-            logging.info("Deleted remaining %s tree" % tree)
+            logging.debug("Deleted remaining %s tree" % tree)
         return
-    logging.info("Skeleton complete")
+    logging.debug("Skeleton complete")
 
 def build_gams_only(package_name = "package", gams_list=["MyGAM"]):
     for gam_name in gams_list:
-        logging.info("Create a GAM skeleton locally for %s" % gam_name)
+        logging.debug("Create a GAM skeleton locally for %s" % gam_name)
         gam = GAM(package_name = package_name, gam_name = gam_name)
-        logging.info("GAM object created")
         gam.cut()
-        logging.info("GAM object cut()")
-    logging.info("build_gams_only : finished")
+    logging.debug("build_gams_only : finished")

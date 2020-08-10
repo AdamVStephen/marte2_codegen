@@ -34,13 +34,12 @@ from marte2_codegen.ccm2 import build_gams_only
 
 def main():
     FORMAT = '%(message)s'
-    #logging.basicConfig(format=FORMAT,level=logging.INFO)
-    logging.basicConfig(format=FORMAT, level=logging.DEBUG)
+    logging.basicConfig(format=FORMAT,level=logging.INFO)
+    #logging.basicConfig(format=FORMAT, level=logging.DEBUG)
 
     parser = argparse.ArgumentParser(description='Generate MARTe2 skeleton package.')
     parser.add_argument('--mode', type=str, help='Mode : [full|gamsonly]', default = "full")
-    parser.add_argument('--package', type=str, help='MARTe2 package name.  Optional if building only gams.', default="package")
-    # TODO Consider option to have different package name and package name.
+    parser.add_argument('--package', type=str, help='MARTe2 package name.  Required.', required=True)
     parser.add_argument('--gams', type=str, help='GAM list as quoted, whitespace separated list.', default="GAM_X GAM_Y")
     #parser.add_argument('--datasources', type=str, help='Issue number', default=0)
     #parser.add_argument('--interfaces', type=str, help='Use cached html? y/n', default="Y")
@@ -48,16 +47,13 @@ def main():
 
     args = parser.parse_args()
 
-    logging.info("Cookiecutting a new MARTe skeleton package : %s" % args.package)
+    logging.info("Cookiecutting a new MARTe package : MARTe2-{0}".format(args.package))
 
-    # Convert from convenient whitespace separated list to a list of strings
     gams_list = args.gams.split()
-    # Build the package
-    #build_package(args.package, gams_list)
-    print("Ready to build %s from %s" % (args.package, gams_list))
 
     if args.mode == "full":
         build_package(package_name = args.package, gams_list = gams_list)
+        logging.info("To build : cd MARTe2-{0} && make -f Makefile.linux".format(args.package))
     elif args.mode == "gamsonly":
         build_gams_only(package_name = args.package, gams_list = gams_list)
     else:
