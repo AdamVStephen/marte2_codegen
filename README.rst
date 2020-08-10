@@ -32,10 +32,14 @@ has a better package management system.
 
 Usage
 -----
-marte2_codegen
+marte2_codegen --package package_name --gams "GAM_A GAM_B GAM_C" [--mode [full|gamsonly]]
 
-This will create a new directory named MARTe2-<package> and populate it for building GAMs, and create as many 
+This will create a new directory named MARTe2-<package_name> and populate it for building GAMs, and create as many 
 GAM subfolders as you provide listed named GAMs prepopulated with a template taken from the MARTe2-components/ConstantGAM.
+
+The GAM names must be a double quoted whitespace separated list, but they can use any name ("GAM" prefix is not mandatory, nor recommended).
+
+e.g. marte2_codegen --package plasma --gams "PlasmaCurrent MhdAmplitude DisruptionDetector"
 
 Subject to having a working MARTe2 build setup, this package will locally build fully.
 
