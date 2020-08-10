@@ -43,6 +43,17 @@ e.g. marte2_codegen --package plasma --gams "PlasmaCurrent MhdAmplitude Disrupti
 
 Subject to having a working MARTe2 build setup, this package will locally build fully.
 
+Dependencies
+------------
+
+The python dependencies are defined in the requirements_dev.txt file
+
+The templates from which the project and the GAM files are derived are maintained independently at
+
+1. https://github.com/AdamVStephen/marte2_cookiecutter_package
+2. https://github.com/AdamVStephen/marte2_cookiecutter_gam
+
+
 Features
 --------
 
