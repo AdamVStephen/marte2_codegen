@@ -1,9 +1,9 @@
 """Main module."""
 
-# Generate a MARTe2 skeleton project and populate it.
+# Generate a MARTe2 skeleton package and populate it.
 #
 # optional arguments:
-#   --project PROJECT       Project folder name
+#   --package PACKAGE       Package folder name
 #   --gam GAM1 GAM2         Whitespace separated list of GAM names.
 #
 # TO BE IMPLEMENTED
