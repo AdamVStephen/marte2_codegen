@@ -29,8 +29,6 @@ from marte2_codegen.ccm2 import emit_gams_subprojects
 from marte2_codegen.ccm2 import emit_gams_libraries_static
 from marte2_codegen.ccm2 import emit_gams_test_libraries_static
 from marte2_codegen.ccm2 import emit_test_libraries
-from marte2_codegen.ccm2 import m2_package_ukaea_license
-from marte2_codegen.ccm2 import m2_gam_plus_ukaea_license
 from marte2_codegen.ccm2 import build_package
 from marte2_codegen.ccm2 import build_gams_only
 
