@@ -38,10 +38,10 @@ def main():
     #logging.basicConfig(format=FORMAT, level=logging.DEBUG)
 
     parser = argparse.ArgumentParser(description='Generate MARTe2 skeleton package.')
-    parser.add_argument('--mode', type=str, help='Mode : [full|gamsonly]', default = "full")
+    parser.add_argument('--mode', type=str, help='Mode : [full|gamsonly|dsonly]', default = "full")
     parser.add_argument('--package', type=str, help='MARTe2 package name.  Required.', required=True)
     parser.add_argument('--gams', type=str, help='GAM list as quoted, whitespace separated list.', default="GAM_X GAM_Y")
-    #parser.add_argument('--datasources', type=str, help='Issue number', default=0)
+    parser.add_argument('--datasources', type=str, help='Datasource list, whitespace separated list.', default="DS_1 DS_2")
     #parser.add_argument('--interfaces', type=str, help='Use cached html? y/n', default="Y")
     #parser.add_argument('--update', type=str, help='Temporary directory for downloaded files', default='temp')
 
@@ -50,12 +50,15 @@ def main():
     logging.info("Cookiecutting a new MARTe package : MARTe2-{0}".format(args.package))
 
     gams_list = args.gams.split()
+    datasources_list = args.datasources.split()
 
     if args.mode == "full":
-        build_package(package_name = args.package, gams_list = gams_list)
+        build_package(package_name = args.package, gams_list = gams_list, datasources_list = datasources_list)
         logging.info("To build : cd MARTe2-{0} && make -f Makefile.linux".format(args.package))
     elif args.mode == "gamsonly":
         build_gams_only(package_name = args.package, gams_list = gams_list)
+    elif args.mode == "dsonly":
+        build_gams_only(package_name = args.package, datasources_list = datasources_list)
     else:
         parser.print_help()
 
